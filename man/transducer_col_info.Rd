@@ -2,14 +2,11 @@
 % Please edit documentation in R/parse-transducers.R
 \name{transducer_col_info}
 \alias{transducer_col_info}
-\title{Transducer Column Info}
+\title{Column info needed to read data}
 \usage{
 transducer_col_info(serial)
 }
-\arguments{
-\item{serial}{the serial number for the transducer}
-}
 \description{
-based on a transducer's serial number determine
-the column names and column needed to read in the csv
+return a list with the column headers and column
+types needed to read in in the data using read_csv
 }
