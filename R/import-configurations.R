@@ -1,0 +1,38 @@
+# This script holds information about the import configuartions
+# for DCR EPA tables
+
+results_configuration <- list(
+  name = "DCR WQX Web REGULAR Results Production",
+  description = "Physical/Chemical of Activity and Results, URL: http://www.epa.gov/storet/wqx/products/WQXWeb_Physical_Chemical_Package.zip",
+  file_type = "csv",
+  column_headings = c("Project ID",
+                      "Monitoring Location ID",
+                      "Activity ID",
+                      "Activity Type",
+                      "Activity Media Name",
+                      "Activity Start Date",
+                      "Activity Start Time",
+                      "Activity Start Time Zone",
+                      "Activity Depth/Height Measure",
+                      "Activity Depth/Height Unit",
+                      "Sample Collection Method ID",
+                      "Sample Collection Equipment Name",
+                      "Sample Collection Equipment Comment",
+                      "Characteristic Name",
+                      "Method Speciation",
+                      "Result Detection Condition",
+                      "Result Value",
+                      "Result Unit",
+                      "Result Qualifier",
+                      "Result Sample Fraction",
+                      "Result Status ID",
+                      "Statistical Base Code",
+                      "Result Value Type",
+                      "Result Analytical Method ID",
+                      "Result Analytical Method Context",
+                      "Analysis Start Date",
+                      "Result Detection Limit Type",
+                      "Result Detection Limit Value",
+                      "Result Detection Limit Unit",
+                      "Result Comment")
+)

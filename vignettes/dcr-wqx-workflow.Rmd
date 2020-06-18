@@ -1,0 +1,22 @@
+---
+title: "Dry Creek Rancheria WQX Workflow"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dry Creek Rancheria WQX Workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(dcrWQX)
+```
+
+## Introduction 
+
+In this article we will look at a simple workflow where we start with 
+raw transducer data and end with uploading a cleaned up version to the EPA's
+WQX.
