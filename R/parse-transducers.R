@@ -59,12 +59,6 @@ device_name_to_location_id <- c(
 )
 
 transducer_to_wqx <- function(data, metadata) {
-  transducer_parse_code <- dcrWQX::transducers %>%
-    dplyr::filter(serial_no == metadata$serial) %>%
-    dplyr::pull(reports) %>%
-    stringr::str_match_all("[A-Z]") %>%
-    magrittr::extract2(1) %>%
-    magrittr::extract(, 1)
 
   if (metadata$serial == "440478") {
     # this just needs to parse for air tempearture
