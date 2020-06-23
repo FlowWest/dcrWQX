@@ -63,9 +63,6 @@ projects_table <- function(db_connection) {
   dplyr::tbl(db_connection, "projects")
 }
 
-
-
-
 validate_col_types <- function(data, table_name) {
   col_types_should_be <-
     switch(table_name,
