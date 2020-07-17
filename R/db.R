@@ -28,7 +28,8 @@ append_data <- function(db_connection,
 }
 
 #' @title Update Data
-#' @description
+#' @description Update data on the server
+#' @export
 update_data <- function(db_connection, table_name, data) {
 
   # TODO this should be simplified using glue

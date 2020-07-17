@@ -7,5 +7,5 @@
 update_data(db_connection, table_name, data)
 }
 \description{
-Update Data
+Update data on the server
 }

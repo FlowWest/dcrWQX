@@ -22,15 +22,16 @@ fix_units <- function(unit) {
   )
 }
 
-read_quapp <- function(file) {
+#' @export
+read_qapp <- function(file) {
   # read in the raw file from excel sheet
   raw_data <- readxl::read_excel(file)
 
 
-  raw_data %>%
+  data <- raw_data %>%
     transmute(
       "Project ID" = "",
-      "Monitoring Location ID" = map_chr(SAMPLENAME, ~fix_location_names(.)),
+      "Monitoring Location ID" = purrr::map_chr(SAMPLENAME, ~fix_location_names(.)),
       "Activity ID" = paste(`Monitoring Location ID`,lubridate::as_date(lubridate::mdy_hms(SAMPDATE)),
                             format(lubridate::mdy_hms(SAMPDATE), "%H:%M:%S"),
                             "FM", sep = ":"),
@@ -48,7 +49,7 @@ read_quapp <- function(file) {
       "Method Speciation" = "",
       "Result Detection Condition" = "",
       "Result Value" = readr::parse_number(Result), # some spreadsheets use RESULT others Result
-      "Result Unit" = map_chr(UNITS, ~fix_units(.)),
+      "Result Unit" = purrr::map_chr(UNITS, ~fix_units(.)),
       "Result Qualifier" = case_when(
         Result == "ND" ~ "ND",
         stringr::str_detect(Result, ">") ~ ">",
@@ -66,6 +67,8 @@ read_quapp <- function(file) {
       "Result Detection Limit Unit" = "",
       "Result Comment" = ""
     )
+
+  list(data = data)
 
 
 }

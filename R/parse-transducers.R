@@ -163,6 +163,7 @@ parse_transducer_stage <- function(data, metadata) {
 
 #' @title Structure Transducer for WQX Stage
 #' @param data Transducer data ready to be restructured to WQX
+#' @export
 parse_transducer_temps <- function(data, metadata) {
   data %>%
     dplyr::transmute(
