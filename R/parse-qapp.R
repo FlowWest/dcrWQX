@@ -10,29 +10,34 @@ fix_location_names <- function(loc) {
   else loc
 }
 
-fix_units <- function(char, unit) {
-  if (char == "E. Coli" & unit == "MPN/100 ml")
-    return("MPN/100mL")
-  else if(char == "Total Coliforms" & unit == "MPN/100 ml")
-    return("MPN/100mL")
-  else if(char == "Fecal Coliforms" & unit == "MPN/100 ml")
-    return("MPN/100mL")
-  else
-    return(unit)
+# This function will simply take variations of units and covert
+# them to the appropriate format. I will add more entries to
+# this function as more issues come up
+# by default the function will return the input if it cannot
+# find the appropriate transformation
+fix_units <- function(unit) {
+  switch (tolower(unit),
+    "mpn/100ml" = "MPN/100 ml",
+    unit
+  )
 }
 
 read_quapp <- function(file) {
-  samp_data %>%
+  # read in the raw file from excel sheet
+  raw_data <- readxl::read_excel(file)
+
+
+  raw_data %>%
     transmute(
       "Project ID" = "",
       "Monitoring Location ID" = map_chr(SAMPLENAME, ~fix_location_names(.)),
-      "Activity ID" = paste(`Monitoring Location ID`,as_date(mdy_hms(SAMPDATE)),
-                            format(mdy_hms(SAMPDATE), "%H:%M:%S"),
+      "Activity ID" = paste(`Monitoring Location ID`,lubridate::as_date(lubridate::mdy_hms(SAMPDATE)),
+                            format(lubridate::mdy_hms(SAMPDATE), "%H:%M:%S"),
                             "FM", sep = ":"),
       "Activity Type" = "Field Measure/Obs",
       "Activity Media Name" = RPTMATRIX,
-      "Activity Start Date" = as_date(mdy_hms(SAMPDATE)),
-      "Activity Start Time" = format(mdy_hms(SAMPDATE), "%H:%M:%S"),
+      "Activity Start Date" = lubridate::as_date(lubridate::mdy_hms(SAMPDATE)),
+      "Activity Start Time" = format(lubridate::mdy_hms(SAMPDATE), "%H:%M:%S"),
       "Activity Start Time Zone" = "PST",
       "Activity Depth/Height Measure" = "",
       "Activity Depth/Height Unit" = "",
@@ -42,11 +47,11 @@ read_quapp <- function(file) {
       "Characteristic Name" = ANALYTE,
       "Method Speciation" = "",
       "Result Detection Condition" = "",
-      "Result Value" = readr::parse_number(Result),
-      "Result Unit" = map2_chr(`Characteristic Name`, UNITS, ~fix_units(.x, .y)),
+      "Result Value" = readr::parse_number(Result), # some spreadsheets use RESULT others Result
+      "Result Unit" = map_chr(UNITS, ~fix_units(.)),
       "Result Qualifier" = case_when(
         Result == "ND" ~ "ND",
-        str_detect(Result, ">") ~ ">",
+        stringr::str_detect(Result, ">") ~ ">",
         TRUE ~ ""
       ),
       "Result Sample Fraction" = "",
