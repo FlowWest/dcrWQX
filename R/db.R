@@ -21,10 +21,34 @@ connect <- function() {
 #' @export
 append_data <- function(db_connection,
                         table_name,
-                        data) {
+                        data, overlaps = FALSE) {
+
+  if (overlaps) {
+    # check what is currently on the database
+    usethis::ui_info("Checking existing records on database")
+    existing_pks <- trimws(dplyr::pull(
+      dplyr::select(dplyr::tbl(db_connection, table_name), Record_ID)
+    ))
+
+    new_keys <- dplyr::setdiff(data$Record_ID, existing_pks)
+
+    if (length(new_keys) == 0) {
+      usethis::ui_oops("No new records found!")
+      return(0)
+    }
+    usethis::ui_done(paste("Found", length(new_keys), "new records!"))
+
+    new_data <- filter(data, Record_ID %in% new_keys)
+
     DBI::dbAppendTable(conn = db_connection,
-                                name = table_name,
-                                value = data)
+                       name = table_name,
+                       value = new_data)
+  } else {
+    DBI::dbAppendTable(conn = db_connection,
+                       name = table_name,
+                       value = data)
+  }
+
 }
 
 #' @title Update Data
@@ -51,7 +75,8 @@ update_data <- function(db_connection, table_name, data) {
 }
 
 
-
+#' @title Show Results
+#' @description convinience function for showing the results table (not colected)
 results_table <- function(db_connection) {
   dplyr::tbl(db_connection, "results")
 }

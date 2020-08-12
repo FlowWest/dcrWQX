@@ -24,7 +24,8 @@ read_transducer <- function(file) {
                      trim_ws = TRUE,
                      skip = skip_n,
                      col_names = col_info$col_names,
-                     col_types = col_info$col_types
+                     col_types = col_info$col_types,
+                     na = ""
   ) %>%
     dplyr::select(-dummy)
 
@@ -87,36 +88,41 @@ parse_transducer_air_temp <- function(data, metadata) {
     dplyr::transmute(
       "Project ID" = "RCS",
       "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
-      "Activity ID" = paste(`Monitoring Location ID`,lubridate::as_date(dateTime),
-                            format(dateTime, "%H:%M:%S"),
-                            "FM", sep = ":"), # need to compute
+      "Activity ID" = paste(
+        `Monitoring Location ID`,
+        format(lubridate::as_date(dateTime), "%Y%m%d"),
+        format(dateTime, "%H%M%S"),
+        "FM",
+        sep = ":"), # need to compute
       "Activity Type" = "Field Msr/Obs", #
       "Activity Media Name" = "Air",
       "Activity Start Date" = lubridate::as_date(dateTime), # need to obtain from data
       "Activity Start Time" = format(dateTime, "%H:%M:%S"), # need to ontain fromd data
       "Activity Start Time Zone" = "PDT",
-      "Activity Depth/Height Measure" = "", # none here
-      "Activity Depth/Height Unit" = "", # none
+      "Activity Depth/Height Measure" = NA_character_, # none here
+      "Activity Depth/Height Unit" = NA_character_, # none
       "Sample Collection Method ID" = "DCR SWQAPP",
       "Sample Collection Equipment Name" = "Probe/Sensor",
       "Sample Collection Equipment Comment" = metadata$type, # get this from the metadata
       "Characteristic Name" = "Temperature, air",
-      "Method Speciation" = "", # nothing
-      "Result Detection Condition" = "", # nothing
+      "Method Speciation" = NA_character_, # nothing
+      "Result Detection Condition" = NA_character_, # nothing
       "Result Value" = temperature_f, # from the data
       "Result Unit" = "deg F", # from data
-      "Result Qualifier" = "", # nothing
-      "Result Sample Fraction" = "", # nothing
+      "Result Qualifier" = NA_character_, # nothing
+      "Result Sample Fraction" = NA_character_, # nothing
       "Result Status ID" = "Final",
-      "Statistical Base Code" = "", # nothing
+      "Statistical Base Code" = NA_character_, # nothing
       "Result Value Type" = "Actual",
-      "Result Analytical Method ID" = "",
-      "Result Analytical Method Context" = "",
-      "Analysis Start Date" = "",
-      "Result Detection Limit Type" = "",
-      "Result Detection Limit Value" = "",
-      "Result Detection Limit Unit" = "",
-      "Result Comment" = ""
+      "Result Analytical Method ID" = NA_character_,
+      "Result Analytical Method Context" = NA_character_,
+      "Analysis Start Date" = NA_character_,
+      "Result Detection Limit Type" = NA_character_,
+      "Result Detection Limit Value" = NA_real_,
+      "Result Detection Limit Unit" = NA_character_,
+      "Result Comment" = NA_character_,
+      "Record_ID" = paste(`Activity ID`, `Characteristic Name`,
+                          sep = ":")
     ) %>%
     dplyr::distinct(`Activity ID`, `Characteristic Name`, .keep_all = TRUE)
 }
@@ -128,8 +134,12 @@ parse_transducer_stage <- function(data, metadata) {
     dplyr::transmute(
       "Project ID" = "RCS",
       "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
-      "Activity ID" = paste0(lubridate::as_date(dateTime), format(dateTime, "%H:%M:%S"),
-                             "Field Msr/Obs"),
+      "Activity ID" = paste(
+        `Monitoring Location ID`,
+        format(lubridate::as_date(dateTime), "%Y%m%d"),
+        format(dateTime, "%H%M%S"),
+        "FM",
+        sep = ":"),
       "Activity Type" = "Field Msr/Obs", #
       "Activity Media Name" = "Water",
       "Activity Start Date" = lubridate::as_date(dateTime), # need to obtain from data
@@ -141,22 +151,24 @@ parse_transducer_stage <- function(data, metadata) {
       "Sample Collection Equipment Name" = "Probe/Sensor",
       "Sample Collection Equipment Comment" = metadata$type, # get this from the metadata
       "Characteristic Name" = "Stream Stage",
-      "Method Speciation" = "", # nothing
-      "Result Detection Condition" = "", # nothing
+      "Method Speciation" = NA_character_, # nothing
+      "Result Detection Condition" = NA_character_, # nothing
       "Result Value" = depth_ft, # from the data
       "Result Unit" = "feet", # from data
-      "Result Qualifier" = "", # nothing
-      "Result Sample Fraction" = "", # nothing
+      "Result Qualifier" = NA_character_, # nothing
+      "Result Sample Fraction" = NA_character_, # nothing
       "Result Status ID" = "Final",
-      "Statistical Base Code" = "", # nothing
+      "Statistical Base Code" = NA_character_, # nothing
       "Result Value Type" = "Actual",
-      "Result Analytical Method ID" = "",
-      "Result Analytical Method Context" = "",
-      "Analysis Start Date" = "",
-      "Result Detection Limit Type" = "",
-      "Result Detection Limit Value" = "",
-      "Result Detection Limit Unit" = "",
-      "Result Comment" = ""
+      "Result Analytical Method ID" = NA_character_,
+      "Result Analytical Method Context" = NA_character_,
+      "Analysis Start Date" = NA_character_,
+      "Result Detection Limit Type" = NA_character_,
+      "Result Detection Limit Value" = NA_real_,
+      "Result Detection Limit Unit" = NA_character_,
+      "Result Comment" = NA_character_,
+      "Record_ID" = paste(`Activity ID`, `Characteristic Name`,
+                          sep = ":")
     ) %>%
     dplyr::distinct(`Activity ID`, `Characteristic Name`, .keep_all = TRUE)
 }
@@ -169,8 +181,12 @@ parse_transducer_temps <- function(data, metadata) {
     dplyr::transmute(
       "Project ID" = "RCS",
       "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
-      "Activity ID" = paste0(lubridate::as_date(dateTime), format(dateTime, "%H:%M:%S"),
-                             "Field Msr/Obs"),
+      "Activity ID" = paste(
+        `Monitoring Location ID`,
+        format(lubridate::as_date(dateTime), "%Y%m%d"),
+        format(dateTime, "%H%M%S"),
+        "FM",
+        sep = ":"),
       "Activity Type" = "Field Msr/Obs", #
       "Activity Media Name" = "Water",
       "Activity Start Date" = lubridate::as_date(dateTime), # need to obtain from data
@@ -182,22 +198,24 @@ parse_transducer_temps <- function(data, metadata) {
       "Sample Collection Equipment Name" = "Probe/Sensor",
       "Sample Collection Equipment Comment" = metadata$type, # get this from the metadata
       "Characteristic Name" = ifelse(depth_ft < 0, "Temperature, water", "Temperature, air"),
-      "Method Speciation" = "", # nothing
-      "Result Detection Condition" = "", # nothing
+      "Method Speciation" = NA_character_, # nothing
+      "Result Detection Condition" = NA_character_, # nothing
       "Result Value" = temperature_f, # from the data
       "Result Unit" = "deg F", # from data
-      "Result Qualifier" = "", # nothing
-      "Result Sample Fraction" = "", # nothing
+      "Result Qualifier" = NA_character_, # nothing
+      "Result Sample Fraction" = NA_character_, # nothing
       "Result Status ID" = "Final",
-      "Statistical Base Code" = "", # nothing
+      "Statistical Base Code" = NA_character_, # nothing
       "Result Value Type" = "Actual",
-      "Result Analytical Method ID" = "",
-      "Result Analytical Method Context" = "",
-      "Analysis Start Date" = "",
-      "Result Detection Limit Type" = "",
-      "Result Detection Limit Value" = "",
-      "Result Detection Limit Unit" = "",
-      "Result Comment" = ""
+      "Result Analytical Method ID" = NA_character_,
+      "Result Analytical Method Context" = NA_character_,
+      "Analysis Start Date" = NA_character_,
+      "Result Detection Limit Type" = NA_character_,
+      "Result Detection Limit Value" = NA_real_,
+      "Result Detection Limit Unit" = NA_character_,
+      "Result Comment" = NA_character_,
+      "Record_ID" = paste(`Activity ID`, `Characteristic Name`,
+                          sep = ":")
     ) %>%
     dplyr::distinct(`Activity ID`, `Characteristic Name`, .keep_all = TRUE)
 }

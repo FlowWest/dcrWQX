@@ -4,7 +4,7 @@
 \alias{append_data}
 \title{Append Data}
 \usage{
-append_data(db_connection, table_name, data)
+append_data(db_connection, table_name, data, overlaps = FALSE)
 }
 \arguments{
 \item{db_connection}{a connection the local database}
