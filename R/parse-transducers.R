@@ -78,7 +78,7 @@ transducer_to_wqx <- function(data, metadata) {
     )
   } else {
     NULL
-  }
+  }x
 }
 
 #' @title Structure Transducer for WQX Air Temp
@@ -90,8 +90,7 @@ parse_transducer_air_temp <- function(data, metadata) {
       "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
       "Activity ID" = paste(
         `Monitoring Location ID`,
-        format(lubridate::as_date(dateTime), "%Y%m%d"),
-        format(dateTime, "%H%M%S"),
+        format(lubridate::as_date(dateTime), "%Y%m%d")
         "FM",
         sep = ":"), # need to compute
       "Activity Type" = "Field Msr/Obs", #
@@ -136,8 +135,7 @@ parse_transducer_stage <- function(data, metadata) {
       "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
       "Activity ID" = paste(
         `Monitoring Location ID`,
-        format(lubridate::as_date(dateTime), "%Y%m%d"),
-        format(dateTime, "%H%M%S"),
+        format(lubridate::as_date(dateTime), "%Y%m%d")
         "FM",
         sep = ":"),
       "Activity Type" = "Field Msr/Obs", #
@@ -183,8 +181,7 @@ parse_transducer_temps <- function(data, metadata) {
       "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
       "Activity ID" = paste(
         `Monitoring Location ID`,
-        format(lubridate::as_date(dateTime), "%Y%m%d"),
-        format(dateTime, "%H%M%S"),
+        format(lubridate::as_date(dateTime), "%Y%m%d")
         "FM",
         sep = ":"),
       "Activity Type" = "Field Msr/Obs", #

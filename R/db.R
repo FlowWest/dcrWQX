@@ -19,7 +19,7 @@ connect <- function() {
 #' @param table_name name of the table to append to
 #' @param data data to add
 #' @export
-append_data <- function(db_connection,
+db_append_data <- function(db_connection,
                         table_name,
                         data, overlaps = FALSE) {
 
@@ -54,7 +54,7 @@ append_data <- function(db_connection,
 #' @title Update Data
 #' @description Update data on the server
 #' @export
-update_data <- function(db_connection, table_name, data) {
+db_update_data <- function(db_connection, table_name, data) {
 
   # TODO this should be simplified using glue
   q_template <-
@@ -74,9 +74,26 @@ update_data <- function(db_connection, table_name, data) {
 
 }
 
+#' Write Data to Disk
+#' @description write a table to disk, this is required to upload to the wqx
+#' @export
+db_write_data <- function(db_connection, table, path, suffix = NULL) {
+  # the process needs to make some data types match what the
+  # wqx expects
+  # Activity Start Date needs to be YYYY/MM/DD
+  # Activity Start Time needs to be HH24:MI:SS
+  # Analysis Start Date needs to be YYYY/MM/DD
+  d <- dplyr::tbl(db_connection, table) %>%
+    dplyr::select(-Record_ID) %>%
+    dplyr::collect()
+
+  readr::write_csv(d, paste0(path, "/physical_results_", format(Sys.time(), "%Y%m%d_%H%M%S.csv")))
+}
+
 
 #' @title Show Results
 #' @description convinience function for showing the results table (not colected)
+#' @export
 results_table <- function(db_connection) {
   dplyr::tbl(db_connection, "results")
 }
