@@ -68,17 +68,17 @@ transducer_to_wqx <- function(data, metadata) {
     )
   } else if (metadata$serial == "440965") {
     dplyr::bind_rows(
-      parse_transducer_stage(data, metadata),
+      # parse_transducer_stage(data, metadata),
       parse_transducer_temps(data, metadata)
     )
   } else if (metadata$serial == "440966") {
     bind_rows(
-      parse_transducer_stage(data, metadata),
+      # parse_transducer_stage(data, metadata),
       parse_transducer_temps(data, metadata)
     )
   } else {
     NULL
-  }x
+  }
 }
 
 #' @title Structure Transducer for WQX Air Temp
@@ -90,17 +90,18 @@ parse_transducer_air_temp <- function(data, metadata) {
       "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
       "Activity ID" = paste(
         `Monitoring Location ID`,
-        format(lubridate::as_date(dateTime), "%Y%m%d")
+        format(lubridate::as_date(dateTime), "%Y%m%d"),
+        "Air",
         "FM",
-        sep = ":"), # need to compute
-      "Activity Type" = "Field Msr/Obs", #
+        sep = ":"),
+      "Activity Type" = "Field Msr/Obs",
       "Activity Media Name" = "Air",
       "Activity Start Date" = lubridate::as_date(dateTime), # need to obtain from data
-      "Activity Start Time" = format(dateTime, "%H:%M:%S"), # need to ontain fromd data
-      "Activity Start Time Zone" = "PDT",
+      "Activity Start Time" = NA_character_, # need to ontain fromd data
+      "Activity Start Time Zone" = NA_character_,
       "Activity Depth/Height Measure" = NA_character_, # none here
       "Activity Depth/Height Unit" = NA_character_, # none
-      "Sample Collection Method ID" = "DCR SWQAPP",
+      "Sample Collection Method ID" = "DCR-QAPP",
       "Sample Collection Equipment Name" = "Probe/Sensor",
       "Sample Collection Equipment Comment" = metadata$type, # get this from the metadata
       "Characteristic Name" = "Temperature, air",
@@ -115,61 +116,19 @@ parse_transducer_air_temp <- function(data, metadata) {
       "Result Value Type" = "Actual",
       "Result Analytical Method ID" = NA_character_,
       "Result Analytical Method Context" = NA_character_,
-      "Analysis Start Date" = NA_character_,
+      "Analysis Start Date" = lubridate::as_date(dateTime),
+      "Analysis Start Time Zone" = "PST",
+      "Analysis Start Time" = format(dateTime, "%H:%M:%S"),
       "Result Detection Limit Type" = NA_character_,
       "Result Detection Limit Value" = NA_real_,
       "Result Detection Limit Unit" = NA_character_,
       "Result Comment" = NA_character_,
-      "Record_ID" = paste(`Activity ID`, `Characteristic Name`,
+      "Record_ID" = paste(`Activity ID`, `Analysis Start Time`, `Characteristic Name`,
                           sep = ":")
     ) %>%
-    dplyr::distinct(`Activity ID`, `Characteristic Name`, .keep_all = TRUE)
+    dplyr::distinct(Record_ID, `Characteristic Name`, .keep_all = TRUE)
 }
 
-#' @title Structure Transducer for WQX Stage
-#' @param data Transducer data ready to be restructured to WQX
-parse_transducer_stage <- function(data, metadata) {
-  data %>%
-    dplyr::transmute(
-      "Project ID" = "RCS",
-      "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
-      "Activity ID" = paste(
-        `Monitoring Location ID`,
-        format(lubridate::as_date(dateTime), "%Y%m%d")
-        "FM",
-        sep = ":"),
-      "Activity Type" = "Field Msr/Obs", #
-      "Activity Media Name" = "Water",
-      "Activity Start Date" = lubridate::as_date(dateTime), # need to obtain from data
-      "Activity Start Time" = format(dateTime, "%H:%M:%S"), # need to ontain fromd data
-      "Activity Start Time Zone" = "PDT",
-      "Activity Depth/Height Measure" = depth_ft, # none here
-      "Activity Depth/Height Unit" = "feet", # none
-      "Sample Collection Method ID" = "DCR SWQAPP",
-      "Sample Collection Equipment Name" = "Probe/Sensor",
-      "Sample Collection Equipment Comment" = metadata$type, # get this from the metadata
-      "Characteristic Name" = "Stream Stage",
-      "Method Speciation" = NA_character_, # nothing
-      "Result Detection Condition" = NA_character_, # nothing
-      "Result Value" = depth_ft, # from the data
-      "Result Unit" = "feet", # from data
-      "Result Qualifier" = NA_character_, # nothing
-      "Result Sample Fraction" = NA_character_, # nothing
-      "Result Status ID" = "Final",
-      "Statistical Base Code" = NA_character_, # nothing
-      "Result Value Type" = "Actual",
-      "Result Analytical Method ID" = NA_character_,
-      "Result Analytical Method Context" = NA_character_,
-      "Analysis Start Date" = NA_character_,
-      "Result Detection Limit Type" = NA_character_,
-      "Result Detection Limit Value" = NA_real_,
-      "Result Detection Limit Unit" = NA_character_,
-      "Result Comment" = NA_character_,
-      "Record_ID" = paste(`Activity ID`, `Characteristic Name`,
-                          sep = ":")
-    ) %>%
-    dplyr::distinct(`Activity ID`, `Characteristic Name`, .keep_all = TRUE)
-}
 
 #' @title Structure Transducer for WQX Stage
 #' @param data Transducer data ready to be restructured to WQX
@@ -181,17 +140,18 @@ parse_transducer_temps <- function(data, metadata) {
       "Monitoring Location ID" = device_name_to_location_id[metadata$name], # need to transform from metadata
       "Activity ID" = paste(
         `Monitoring Location ID`,
-        format(lubridate::as_date(dateTime), "%Y%m%d")
+        format(lubridate::as_date(dateTime), "%Y%m%d"),
+        "Water",
         "FM",
         sep = ":"),
       "Activity Type" = "Field Msr/Obs", #
       "Activity Media Name" = "Water",
       "Activity Start Date" = lubridate::as_date(dateTime), # need to obtain from data
-      "Activity Start Time" = format(dateTime, "%H:%M:%S"), # need to ontain fromd data
-      "Activity Start Time Zone" = "PDT",
+      "Activity Start Time" = NA_character_, # need to ontain fromd data
+      "Activity Start Time Zone" = NA_character_,
       "Activity Depth/Height Measure" = depth_ft, # none here
-      "Activity Depth/Height Unit" = "feet", # none
-      "Sample Collection Method ID" = "DCR SWQAPP",
+      "Activity Depth/Height Unit" = "ft", # none
+      "Sample Collection Method ID" = "DCR-QAPP",
       "Sample Collection Equipment Name" = "Probe/Sensor",
       "Sample Collection Equipment Comment" = metadata$type, # get this from the metadata
       "Characteristic Name" = ifelse(depth_ft < 0, "Temperature, water", "Temperature, air"),
@@ -206,15 +166,17 @@ parse_transducer_temps <- function(data, metadata) {
       "Result Value Type" = "Actual",
       "Result Analytical Method ID" = NA_character_,
       "Result Analytical Method Context" = NA_character_,
-      "Analysis Start Date" = NA_character_,
+      "Analysis Start Date" = lubridate::as_date(dateTime),
+      "Analysis Start Time Zone" = "PST",
+      "Analysis Start Time" = format(dateTime, "%H:%M:%S"),
       "Result Detection Limit Type" = NA_character_,
       "Result Detection Limit Value" = NA_real_,
       "Result Detection Limit Unit" = NA_character_,
       "Result Comment" = NA_character_,
-      "Record_ID" = paste(`Activity ID`, `Characteristic Name`,
+      "Record_ID" = paste(`Activity ID`, `Analysis Start Time`, `Characteristic Name`,
                           sep = ":")
     ) %>%
-    dplyr::distinct(`Activity ID`, `Characteristic Name`, .keep_all = TRUE)
+    dplyr::distinct(Record_ID, `Characteristic Name`, .keep_all = TRUE)
 }
 
 #' @title Column info needed to read data
