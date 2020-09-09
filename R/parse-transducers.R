@@ -69,12 +69,12 @@ transducer_to_wqx <- function(data, metadata) {
   } else if (metadata$serial == "440965") {
     dplyr::bind_rows(
       # parse_transducer_stage(data, metadata),
-      parse_transducer_temps(data, metadata)
+      parse_transducer_water_temp(data, metadata)
     )
   } else if (metadata$serial == "440966") {
     bind_rows(
       # parse_transducer_stage(data, metadata),
-      parse_transducer_temps(data, metadata)
+      parse_transducer_water_temp(data, metadata)
     )
   } else {
     NULL
@@ -129,11 +129,10 @@ parse_transducer_air_temp <- function(data, metadata) {
     dplyr::distinct(Record_ID, `Characteristic Name`, .keep_all = TRUE)
 }
 
-
 #' @title Structure Transducer for WQX Stage
 #' @param data Transducer data ready to be restructured to WQX
 #' @export
-parse_transducer_temps <- function(data, metadata) {
+parse_transducer_water_temp <- function(data, metadata) {
   data %>%
     dplyr::transmute(
       "Project ID" = "RCS",
@@ -149,15 +148,15 @@ parse_transducer_temps <- function(data, metadata) {
       "Activity Start Date" = lubridate::as_date(dateTime), # need to obtain from data
       "Activity Start Time" = NA_character_, # need to ontain fromd data
       "Activity Start Time Zone" = NA_character_,
-      "Activity Depth/Height Measure" = depth_ft, # none here
-      "Activity Depth/Height Unit" = "ft", # none
+      "Activity Depth/Height Measure" = NA_character_, # none here
+      "Activity Depth/Height Unit" = NA_character_, # none
       "Sample Collection Method ID" = "DCR-QAPP",
       "Sample Collection Equipment Name" = "Probe/Sensor",
       "Sample Collection Equipment Comment" = metadata$type, # get this from the metadata
-      "Characteristic Name" = ifelse(depth_ft < 0, "Temperature, water", "Temperature, air"),
+      "Characteristic Name" = "Temperature, water",
       "Method Speciation" = NA_character_, # nothing
-      "Result Detection Condition" = NA_character_, # nothing
-      "Result Value" = temperature_f, # from the data
+      "Result Detection Condition" = ifelse(depth_ft <= .1, "Not Detected at Reporting Limit", NA_character_), # nothing
+      "Result Value" = ifelse(depth_ft <= .1, NA_real_, temperature_f), # from the data
       "Result Unit" = "deg F", # from data
       "Result Qualifier" = NA_character_, # nothing
       "Result Sample Fraction" = NA_character_, # nothing
