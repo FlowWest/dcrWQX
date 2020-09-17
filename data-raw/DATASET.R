@@ -15,3 +15,10 @@ transducers <-
                                               "tbl", "data.frame"))
 
 usethis::use_data(transducers, overwrite = TRUE)
+
+transducer_subsets_to_keep <- tibble(
+  datetime = seq(as_datetime("2016-01-01 00:00:00"),
+                 as_datetime("2022-12-31 23:45:00"), by = "2 hours")
+)
+
+usethis::use_data(transducer_subsets_to_keep, overwrite = TRUE)

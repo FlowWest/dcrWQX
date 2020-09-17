@@ -157,7 +157,7 @@ parse_transducer_water_temp <- function(data, metadata) {
       "Method Speciation" = NA_character_, # nothing
       "Result Detection Condition" = ifelse(depth_ft <= .1, "Not Detected at Reporting Limit", NA_character_), # nothing
       "Result Value" = ifelse(depth_ft <= .1, NA_real_, temperature_f), # from the data
-      "Result Unit" = "deg F", # from data
+      "Result Unit" = ifelse(is.na(`Result Value`), NA_character_, "deg F"), # from data
       "Result Qualifier" = NA_character_, # nothing
       "Result Sample Fraction" = NA_character_, # nothing
       "Result Status ID" = "Final",

@@ -3,6 +3,7 @@ library(tidyverse)
 library(dcrWQX)
 library(lubridate)
 library(gt)
+
 # update database
 con <- dcrWQX::connect()
 
@@ -17,7 +18,14 @@ baro_air <- wqx_csv_results(con,
 
 # validate the data a bit
 baro_air %>%
-  select(`Activity Start Date`, `Activity Start Time`, `Result Value`)
+  select(
+    `Activity Start Date`,
+    `Activity Start Time`,
+    `Analysis Start Time`,
+    `Analysis Start Time Zone`,
+    `Result Value`
+  ) %>%
+  glimpse()
 
 baro_air %>%
   group_by(
@@ -37,53 +45,6 @@ baro_air %>%
 # EPO1 ------------------------------------------------------------
 # 440965 TS
 
-# stream stage
-epo_stream <- wqx_csv_results(con,
-                              location = "EPO1",
-                              characteristic = "Stream Stage",
-                              file_path = "../DATA/physical-results/epo1-stream-stage_results.csv")
-
-epo_stream %>%
-  select(`Activity Start Date`, `Activity Start Time`, `Result Value`)
-
-epo_stream %>%
-  group_by(
-    location_id = `Monitoring Location ID`,
-    chars_name = `Characteristic Name`) %>%
-  summarise(
-    total = n(),
-    start_date = min(as_date(`Activity Start Date`)),
-    end_date = max(as_date(`Activity Start Date`))
-  ) %>% ungroup()
-
-epo_stream %>%
-  ggplot(aes(as_date(`Activity Start Date`), `Result Value`)) +
-  geom_point(alpha = 0.1)
-
-# air temperature
-epo_air <- wqx_csv_results(con,
-                           location = "EPO1",
-                           characteristic = "Temperature, air",
-                           file_path = "../DATA/physical-results/epo1-air-temp_results.csv")
-
-epo_air %>%
-  select(`Activity Start Date`, `Activity Start Time`, `Result Value`)
-
-epo_air %>%
-  group_by(
-    location_id = `Monitoring Location ID`,
-    chars_name = `Characteristic Name`) %>%
-  summarise(
-    total = n(),
-    start_date = min(as_date(`Activity Start Date`)),
-    end_date = max(as_date(`Activity Start Date`))
-  ) %>% ungroup()
-
-epo_air %>%
-  ggplot(aes(as_date(`Activity Start Date`), `Result Value`)) +
-  geom_point(alpha = 0.1)
-
-
 # water temperature
 epo_water <- wqx_csv_results(con,
                              location = "EPO1",
@@ -91,7 +52,15 @@ epo_water <- wqx_csv_results(con,
                              file_path = "../DATA/physical-results/epo1-water-temp_results.csv")
 
 epo_water %>%
-  select(`Activity Start Date`, `Activity Start Time`, `Result Value`)
+  select(
+    `Activity Start Date`,
+    `Activity Start Time`,
+    `Analysis Start Time`,
+    `Analysis Start Time Zone`,
+    `Result Value`,
+    `Result Unit`
+  ) %>%
+  glimpse()
 
 epo_water %>%
   group_by(
@@ -109,32 +78,6 @@ epo_water %>%
 
 
 # VY1 -----------------------------------------------------------
-
-# 440966
-
-# stream stage
-vy1_stream <- wqx_csv_results(con,
-                              location = "VY1",
-                              characteristic = "Stream Stage",
-                              file_path = "../DATA/physical-results/vy1-stream-stage_results.csv")
-
-vy1_stream %>%
-  select(`Activity Start Date`, `Activity Start Time`, `Result Value`)
-
-vy1_stream %>%
-  group_by(
-    location_id = `Monitoring Location ID`,
-    chars_name = `Characteristic Name`) %>%
-  summarise(
-    total = n(),
-    start_date = min(as_date(`Activity Start Date`)),
-    end_date = max(as_date(`Activity Start Date`))
-  ) %>% ungroup()
-
-vy1_stream %>%
-  ggplot(aes(as_date(`Activity Start Date`), `Result Value`)) +
-  geom_point(alpha = 0.1)
-
 
 # water temp
 vy1_water <- wqx_csv_results(con,
@@ -158,33 +101,4 @@ vy1_water %>%
 vy1_water %>%
   ggplot(aes(x = as_date(`Activity Start Date`), y = `Result Value`)) +
   geom_point(alpha = 0.1)
-
-
-# air temp
-vy1_air <- wqx_csv_results(con,
-                             location = "VY1",
-                             characteristic = "Temperature, air",
-                             file_path = "../DATA/physical-results/vy1-air-temp_results.csv")
-
-vy1_air %>%
-  select(`Activity Start Date`, `Activity Start Time`, `Result Value`)
-
-vy1_air %>%
-  group_by(
-    location_id = `Monitoring Location ID`,
-    chars_name = `Characteristic Name`) %>%
-  summarise(
-    total = n(),
-    start_date = min(as_date(`Activity Start Date`)),
-    end_date = max(as_date(`Activity Start Date`))
-  ) %>% ungroup()
-
-vy1_air %>%
-  ggplot(aes(x = as_date(`Activity Start Date`), y = `Result Value`)) +
-  geom_point(alpha = 0.1)
-
-
-
-
-
 

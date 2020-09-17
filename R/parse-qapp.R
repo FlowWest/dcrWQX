@@ -23,49 +23,50 @@ fix_units <- function(unit) {
 }
 
 #' @export
-read_qapp <- function(file) {
+read_qapp <- function(file, result_col = "Result") {
   # read in the raw file from excel sheet
   raw_data <- readxl::read_excel(file)
 
 
   data <- raw_data %>%
     transmute(
-      "Project ID" = "",
+      "Project ID" = "RCS", # needs to be filled out
       "Monitoring Location ID" = purrr::map_chr(SAMPLENAME, ~fix_location_names(.)),
       "Activity ID" = paste(`Monitoring Location ID`,lubridate::as_date(lubridate::mdy_hms(SAMPDATE)),
-                            format(lubridate::mdy_hms(SAMPDATE), "%H:%M:%S"),
                             "FM", sep = ":"),
       "Activity Type" = "Field Measure/Obs",
       "Activity Media Name" = RPTMATRIX,
       "Activity Start Date" = lubridate::as_date(lubridate::mdy_hms(SAMPDATE)),
-      "Activity Start Time" = format(lubridate::mdy_hms(SAMPDATE), "%H:%M:%S"),
-      "Activity Start Time Zone" = "PST",
-      "Activity Depth/Height Measure" = "",
-      "Activity Depth/Height Unit" = "",
-      "Sample Collection Method ID" = "",
-      "Sample Collection Equipment Name" = "",
-      "Sample Collection Equipment Comment" = "",
+      "Activity Start Time" = NA_character_,
+      "Activity Start Time Zone" = NA_character_,
+      "Activity Depth/Height Measure" = NA_character_,
+      "Activity Depth/Height Unit" = NA_character_,
+      "Sample Collection Method ID" = "DCR-QAPP",
+      "Sample Collection Equipment Name" = NA_character_,
+      "Sample Collection Equipment Comment" = NA_character_,
       "Characteristic Name" = ANALYTE,
-      "Method Speciation" = "",
-      "Result Detection Condition" = "",
-      "Result Value" = readr::parse_number(Result), # some spreadsheets use RESULT others Result
+      "Method Speciation" = NA_character_,
+      "Result Detection Condition" = NA_character_,
+      "Result Value" = readr::parse_number(result_col), # some spreadsheets use RESULT others Result
       "Result Unit" = purrr::map_chr(UNITS, ~fix_units(.)),
       "Result Qualifier" = case_when(
-        Result == "ND" ~ "ND",
-        stringr::str_detect(Result, ">") ~ ">",
+        result_col == "ND" ~ "ND",
+        stringr::str_detect(result_col, ">") ~ ">",
         TRUE ~ ""
       ),
-      "Result Sample Fraction" = "",
-      "Result Status ID" = "",
-      "Statistical Base Code" = "",
-      "Result Value Type" = "",
-      "Result Analytical Method ID" = "",
-      "Result Analytical Method Context" = "",
-      "Analysis Start Date" = "",
-      "Result Detection Limit Type" = "",
-      "Result Detection Limit Value" = "",
-      "Result Detection Limit Unit" = "",
-      "Result Comment" = ""
+      "Result Sample Fraction" = NA_character_,
+      "Result Status ID" = NA_character_,
+      "Statistical Base Code" = NA_character_,
+      "Result Value Type" = NA_character_,
+      "Result Analytical Method ID" = NA_character_,
+      "Result Analytical Method Context" = NA_character_,
+      "Analysis Start Date" = lubridate::as_date(lubridate::mdy_hms(SAMPDATE)),
+      "Analysis Start Time Zone" = "PST",
+      "Analysis Start Time" = format(lubridate::mdy_hms(SAMPDATE), "%H:%M:%S"),
+      "Result Detection Limit Type" = NA_character_,
+      "Result Detection Limit Value" = NA_character_,
+      "Result Detection Limit Unit" = NA_character_,
+      "Result Comment" = NA_character_
     )
 
   list(data = data)
