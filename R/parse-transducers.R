@@ -94,7 +94,7 @@ parse_transducer_air_temp <- function(data, metadata) {
         "Air",
         "FM",
         sep = ":"),
-      "Activity Type" = "Field Msr/Obs",
+      "Activity Type" = "Field Msr/Obs-Portable Data Logger", # data logger
       "Activity Media Name" = "Air",
       "Activity Start Date" = lubridate::as_date(dateTime), # need to obtain from data
       "Activity Start Time" = NA_character_, # need to ontain fromd data
@@ -104,6 +104,7 @@ parse_transducer_air_temp <- function(data, metadata) {
       "Sample Collection Method ID" = "DCR-QAPP",
       "Sample Collection Equipment Name" = "Probe/Sensor",
       "Sample Collection Equipment Comment" = metadata$type, # get this from the metadata
+      "Data Logger Line" = format(data$dateTime, "%Y%m%d_%H%M%S"),
       "Characteristic Name" = "Temperature, air",
       "Method Speciation" = NA_character_, # nothing
       "Result Detection Condition" = NA_character_, # nothing
