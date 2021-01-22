@@ -1,0 +1,61 @@
+raw_name,use_in_db,wqx_name,cas_number,srs_id,sample_fraction_required,analytical_method_required,method_speciation_required,pick_list,group_name,domain_value,last_change
+TPH as Gasoline,TRUE,Total Petroleum Hydrocarbons (C6-C32 TPH),,,FALSE,FALSE,FALSE,FALSE,Not Assigned,Accepted,4/2/2015 7:59:17 AM
+Toluene-d8,FALSE,Toluene-d8,2037-26-5,961581,TRUE,FALSE,FALSE,FALSE,"Organics, Other",Accepted,3/2/2007 8:42:23 AM
+Turbidity,FALSE,Turbidity,,1640507,FALSE,FALSE,FALSE,FALSE,Physical,Accepted,4/15/2020 12:28:58 PM
+Aluminum,FALSE,Aluminum,7429-90-5,149476,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,3/2/2007 8:40:13 AM
+Copper,FALSE,Copper,7440-50-8,150086,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,3/2/2007 8:40:38 AM
+Iron,FALSE,Iron,7439-89-6,149559,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,4/19/2020 1:50:12 PM
+Lead,FALSE,Lead,7439-92-1,149583,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,3/2/2007 8:41:11 AM
+Manganese,FALSE,Manganese,7439-96-5,149625,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,3/2/2007 8:41:14 AM
+Nickel,FALSE,Nickel,7440-02-0,149674,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,4/19/2020 1:50:11 PM
+Potassium,FALSE,Potassium,7440-09-7,149740,FALSE,TRUE,FALSE,FALSE,"Inorganics, Major, Metals",Accepted,10/31/2019 10:44:01 AM
+Antimony,FALSE,Antimony,7440-36-0,149963,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Non-metals",Accepted,3/2/2007 8:40:15 AM
+Silver,FALSE,Silver,7440-22-4,149849,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,3/2/2007 8:42:07 AM
+Sodium,FALSE,Sodium,7440-23-5,149856,TRUE,TRUE,FALSE,FALSE,"Inorganics, Major, Metals",Accepted,4/19/2020 1:50:12 PM
+Zinc,FALSE,Zinc,7440-66-6,150235,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,3/2/2007 8:42:33 AM
+Barium,FALSE,Barium,7440-39-3,149997,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,3/2/2007 8:40:20 AM
+Beryllium,FALSE,Beryllium,7440-41-7,150003,TRUE,TRUE,FALSE,FALSE,"Inorganics, Minor, Metals",Accepted,3/2/2007 8:40:23 AM
+Cadmium,FALSE,,,,,,,,,,
+Calcium,FALSE,,,,,,,,,,
+Chromium,FALSE,,,,,,,,,,
+Arsenic,FALSE,,,,,,,,,,
+Mercury,FALSE,,,,,,,,,,
+Phosphate,FALSE,,,,,,,,,,
+Chloride,FALSE,,,,,,,,,,
+Fluoride,FALSE,,,,,,,,,,
+Nitrate as N,FALSE,,,,,,,,,,
+Nitrite as N,FALSE,,,,,,,,,,
+Orthophosphate as P,FALSE,,,,,,,,,,
+Sulfate as SO4,FALSE,,,,,,,,,,
+Benzene,FALSE,,,,,,,,,,
+Bromofluorobenzene,FALSE,,,,,,,,,,
+Dibromofluoromethane,FALSE,,,,,,,,,,
+Toluene,FALSE,,,,,,,,,,
+Ethylbenzene,FALSE,,,,,,,,,,
+Xylenes (total),FALSE,,,,,,,,,,
+Methyl tert-butyl ether,FALSE,,,,,,,,,,
+Total Anions,FALSE,,,,,,,,,,
+Bicarbonate,FALSE,,,,,,,,,,
+Total Dissolved Solids,FALSE,,,,,,,,,,
+Cyanide (total),FALSE,,,,,,,,,,
+pH,TRUE,pH,,1644285,FALSE,FALSE,FALSE,FALSE,Physical,Accepted,4/15/2020 11:52:50 AM
+Total Inorganic Nitrogen,FALSE,,,,,,,,,,
+Ammonia as N,FALSE,,,,,,,,,,
+Total Kjeldahl Nitrogen,FALSE,,,,,,,,,,
+Methylene Blue Active Substances,FALSE,,,,,,,,,,
+TPH as Diesel,FALSE,,,,,,,,,,
+TPH as Motor Oil,TRUE,Total Petroleum Hydrocarbons (C6-C32 TPH),,,FALSE,FALSE,FALSE,FALSE,Not Assigned,Accepted,4/2/2015 7:59:17 AM
+Tetratetracontane,FALSE,,,,,,,,,,
+"Chromium, hexavalent",FALSE,,,,,,,,,,
+Residual Chlorine,FALSE,,,,,,,,,,
+Dissolved Oxygen,TRUE,Dissolved oxygen (DO),,1736457,FALSE,FALSE,FALSE,FALSE,Physical,Accepted,3/2/2007 8:40:50 AM
+Total Coliforms,FALSE,,,,,,,,,,
+Fecal Coliforms,FALSE,,,,,,,,,,
+Nitrate as NO3,FALSE,,,,,,,,,,
+E. Coli,FALSE,,,,,,,,,,
+"Phosphorus, total",FALSE,,,,,,,,,,
+Orthophosphate,FALSE,,,,,,,,,,
+"MBAS, calculated as LAS, mw 340",FALSE,,,,,,,,,,
+"Temperature, air",TRUE,"Temperature, air",,1645712,FALSE,FALSE,FALSE,FALSE,Physical,Accepted,3/2/2007 8:42:17 AM
+"Temperature, water",TRUE,"Temperature, water",,1645597,FALSE,FALSE,FALSE,FALSE,Physical,Accepted,3/2/2007 8:42:18 AM
+Stream stage,TRUE,Stream stage,,1645514,FALSE,FALSE,FALSE,FALSE,Physical,Accepted,3/2/2007 8:42:10 AM

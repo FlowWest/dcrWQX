@@ -22,3 +22,35 @@ transducer_subsets_to_keep <- tibble(
 )
 
 usethis::use_data(transducer_subsets_to_keep, overwrite = TRUE)
+
+# MEASUREMENT UNITS -----------------------------------------------------------------------
+# measurement unit conversions from lab data to wqx
+# the process for creating this dataset is manual by looking
+# the reported units and finding the appropriate entry on the excel file
+# from the wqx.
+measuremnt_units_lookup <- read_csv("data-raw/domain-values/measurement-units-lookup.csv")
+usethis::use_data(measuremnt_units_lookup, overwrite = TRUE)
+
+
+# CHARACTERISTIC NAMES -------------------------------------------------
+characteristic_names_lookup <- read_csv("data-raw/domain-values/analyte-names-lookup.csv") %>%
+  filter(use_in_db)
+
+usethis::use_data(characteristic_names_lookup, overwrite = TRUE)
+
+# CHARACTERISTIC ATTRIBUTES ----------------------------------------------
+characteristic_attributes <- read_csv("data-raw/domain-values/characteristic-attributes.csv")
+
+usethis::use_data(characteristic_attributes, overwrite = TRUE)
+
+
+# METHOD ID AND CONTEXT
+method_id_and_context <- read_csv("data-raw/domain-values/dcr-method-codes-lookup.csv")
+
+usethis::use_data(method_id_and_context, overwrite = TRUE)
+
+
+
+
+
+

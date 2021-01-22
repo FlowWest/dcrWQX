@@ -1,0 +1,8 @@
+raw_data_units,wqx_units,description
+ug/l      ,ug/l,"Density, Micrograms per liter"
+NTU       ,NTU,"Turbidity, Nephelometric Turbidity Units"
+mg/l      ,mg/l,"Concentration Solution, Milligrams per liter"
+meq/l     ,meq/L,"Density, Milli-equivalents per Liter"
+pH Units  ,pH Units  ,
+MPN/100 ml,MPN/100ml,"Concentration Solution, Most Probable Number per 100 milliliters"
+7 MPN/100mL ,MPN/100ml,"Concentration Solution, Most Probable Number per 100 milliliters"

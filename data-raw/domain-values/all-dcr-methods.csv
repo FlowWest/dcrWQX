@@ -1,0 +1,76 @@
+method_code,method_name,Result Analytical Method ID,Result Analytical Method Context
+TPH G 8260,8260GRO,,
+Turbidity-180.1,EPA 180.1,180.1,USEPA
+Al Total ICP 200.7,EPA 200.7,200.7,USEPA
+Cu Total ICP 200.7,EPA 200.7,200.7,USEPA
+Fe Total ICP 200.7,EPA 200.7,200.7,USEPA
+Pb Total ICP 200.7,EPA 200.7,200.7,USEPA
+Mn Total ICP 200.7,EPA 200.7,200.7,USEPA
+Ni Total ICP 200.7,EPA 200.7,200.7,USEPA
+K Total ICP 200.7,EPA 200.7,200.7,USEPA
+Sb Total ICP 200.7,EPA 200.7,200.7,USEPA
+Ag Total ICP 200.7,EPA 200.7,200.7,USEPA
+Na Total ICP 200.7,EPA 200.7,200.7,USEPA
+Zn Total ICP 200.7,EPA 200.7,200.7,USEPA
+Ba Total ICP 200.7,EPA 200.7,200.7,USEPA
+Be Total ICP 200.7,EPA 200.7,200.7,USEPA
+Cd Total ICP 200.7,EPA 200.7,200.7,USEPA
+Ca Total ICP 200.7,EPA 200.7,200.7,USEPA
+Cr Total ICP 200.7,EPA 200.7,200.7,USEPA
+As Total GFAA 200.9,EPA 200.9,200.9,USEPA
+Hg Total CVAA 245.1,EPA 245.1,245.1,USEPA
+Phosphate 300.0,EPA 300.0,300.0,USEPA
+Chloride 300.0,EPA 300.0,300.0,USEPA
+Fluoride 300.0,EPA 300.0,300.0,USEPA
+Nitrate as N 300.0,EPA 300.0,300.0,USEPA
+Nitrite as N 300.0,EPA 300.0,300.0,USEPA
+Orthophosphate-P 300,EPA 300.0,300.0,USEPA
+Sulfate 300.0,EPA 300.0,300.0,USEPA
+BTEX/M 8260,EPA 8260B,8260B,USEPA
+"Anions, Total",SM1030F,,
+Bicarbonate,SM2320B,,
+"Solids, TDS-SM2540C",SM2540C,,
+"Cyanide, Total",SM4500CNE,,
+pH water SM4500,SM4500-H+ B,,
+"Nitrogen, Inorg Calc",SM4500-N,,
+Ammonia as N,SM4500NH3C,,
+TKN SM4500,SM4500-Norg B,,
+MBAS- SM5540C,SM5540C,,
+TPH D/MO Amber,8015DRO,,
+Cr6 218.6 High Level,EPA 218.6,,
+"Chlorine, Total Resi",SM4500-Cl F,,
+Diss Oxygen SM4500,SM4500-O G,,
+"Coliform, Total 15 WW",SM9221,,
+"Coliform, Fecal 15 WW",SM9221,,
+EPA 300.0,Anions by EPA Method 300.0,,
+EPA 180.1,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM1030F,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM2320B,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM2540C,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM4500-H+ B,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM4500-O G,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM5540C,Conventional Chemistry Parameters by APHA/EPA Meth,,
+EPA 200.7,Metals by EPA 200 Series Methods,,
+EPA 218.6,Metals by EPA 200 Series Methods,,
+SM9221,Microbiological Parameters by APHA Standard Method,,
+8015DRO,TPH by EPA/LUFT GC/GCMS Methods,,
+8260GRO,TPH by EPA/LUFT GC/GCMS Methods,,
+EPA 8260B,Volatile Organic Compounds by EPA Method 8260B,,
+"Coliform, Total 15 WW",SM9221B,,
+"Coliform, Fecal 15 WW",SM9221E,,
+TKN SM4500,SM4500-No B,,
+TPH D,8015DRO,,
+"Cyanide, Total",10-204-00-1X,,
+TPH D Amber,8015DRO,,
+Cr6 3500CrB Water,SM3500-Cr B,,
+"Coliform, Fecal 15 DW",SM9223,,
+Hg Total CVAA 245.1 1ppb,EPA 245.1,,
+SM2130B,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM4500-N,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM4500NH3C,Conventional Chemistry Parameters by APHA/EPA Meth,,
+SM9223,Microbiological Parameters by APHA Standard Method,,
+Turbidity-2130B,SM2130B,,
+TKN SM4500,SM4500-NH3 C,,
+Phosphorus-SM4500,SM4500-P E,,
+"Coliform, EColi Quantitray DW",SM9223,,
+Orthophosphate 300.0,EPA 300.0,,

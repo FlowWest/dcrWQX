@@ -47,7 +47,8 @@ read_transducer <- function(file, downslace = FALSE) {
     data <- scale_down_to_wqx(data)
   }
 
-  wqx_data <- transducer_to_wqx(data, device_props)
+  wqx_data <- transducer_to_wqx(data, device_props) %>%
+    filter(!is.na(`Result Value`))
 
   list(
     "data" = wqx_data,
@@ -129,7 +130,8 @@ parse_transducer_air_temp <- function(data, metadata) {
       "Result Value Type" = "Actual",
       "Analysis Start Date" = format(lubridate::as_date(dateTime), "%Y/%m/%d"),
       "Analysis Start Time" = format(dateTime, "%H:%M:%S"),
-      "Analysis Start Time Zone" = "PST"
+      "Analysis Start Time Zone" = "PST",
+      "Result Comment" = NA_character_
     )
 }
 
