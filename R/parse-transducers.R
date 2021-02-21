@@ -15,16 +15,20 @@ scale_down_to_wqx <- function(data) {
     left_join(data, by=c("dateTime"="dateTime"))
 }
 
-# these transducer files are typically filled with metadata
-# for the first ~70 lines, this is then followed by data records
-
 #' @title Read transducer data
 #' @description read transducer raw data and restructure to conform
 #' with DCR and WQX compliant schema
 #' @param file a csv file with transducer output
 #' @param downscale whether or not to downscale the data to 2 hour intervals (for wqx upload)
+#' @details
+#' It is suggested by WQX standards that logger data (usually reported at 15-minute intervals)
+#' be uploaded at 2-hour intervals (or longer). By default we will structure data
+#' to report the values at 2 hour intervals (top of the hour).
 #' @export
 read_transducer <- function(file, downslace = FALSE) {
+
+  # transducer files are typically filled with metadata
+  # for the first ~70 lines, this is then followed by data record
   header_chunk <- readr::read_lines(file, n_max = 100)
   skip_n <- which(stringr::str_detect(header_chunk, "^Date and Time"))[2]
   device_props <- transducer_properties(header_chunk)
