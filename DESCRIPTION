@@ -1,12 +1,12 @@
 Package: dcrWQX
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Dry Creek Rancheria WQX R Interface
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: person("Emanuel", "Rodriguez", email = "erodriguez@flowwest.com",
+                  role = c("aut", "cre"))
+Description: Data Management package for structuring, updating and downloading
+    water quality in compliance with the WQX metadata standards.
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Imports: 
