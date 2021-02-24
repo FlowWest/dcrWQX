@@ -12,7 +12,7 @@ fix_location_names <- function(loc) {
 }
 
 #' @export
-read_qapp <- function(file, results_status = "Preliminary") {
+read_qapp <- function(file, results_status = "Final") {
   # read in the raw file from excel sheet
   raw_data <- readxl::read_excel(file, sheet = "SAMPDATA")
 

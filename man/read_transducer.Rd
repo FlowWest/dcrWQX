@@ -4,12 +4,19 @@
 \alias{read_transducer}
 \title{Read transducer data}
 \usage{
-read_transducer(file)
+read_transducer(file, downslace = FALSE)
 }
 \arguments{
 \item{file}{a csv file with transducer output}
+
+\item{downscale}{whether or not to downscale the data to 2 hour intervals (for wqx upload)}
 }
 \description{
 read transducer raw data and restructure to conform
 with DCR and WQX compliant schema
+}
+\details{
+It is suggested by WQX standards that logger data (usually reported at 15-minute intervals)
+be uploaded at 2-hour intervals (or longer). By default we will structure data
+to report the values at 2 hour intervals (top of the hour).
 }

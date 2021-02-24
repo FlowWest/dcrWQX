@@ -25,7 +25,7 @@ scale_down_to_wqx <- function(data) {
 #' be uploaded at 2-hour intervals (or longer). By default we will structure data
 #' to report the values at 2 hour intervals (top of the hour).
 #' @export
-read_transducer <- function(file, downslace = FALSE) {
+read_transducer <- function(file, downslace = FALSE){
 
   # transducer files are typically filled with metadata
   # for the first ~70 lines, this is then followed by data record
