@@ -13,7 +13,8 @@ Imports:
     odbc,
     DBI,
     purrr,
-    stringr
+    stringr, 
+    dplyr
 RoxygenNote: 7.1.1
 Suggests: 
     knitr,
