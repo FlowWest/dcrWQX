@@ -15,7 +15,8 @@ Imports:
     purrr,
     stringr, 
     dplyr, 
-    readr
+    readr, 
+    tidyr
 RoxygenNote: 7.1.1
 Suggests: 
     knitr,
