@@ -16,6 +16,10 @@ read_qapp <- function(file, results_status = "Final") {
   # read in the raw file from excel sheet
   raw_data <- readxl::read_excel(file, sheet = "SAMPDATA")
 
+  if (is.null(raw_data$RESULT)) {
+    stop("There was an error in parsing qapp file, it looks like the result columns is not
+         labelled 'RESULT', please change this to 'RESULT'")
+  }
 
   data <-
     raw_data %>%
