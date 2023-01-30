@@ -25,7 +25,7 @@ scale_down_to_wqx <- function(data) {
 #' be uploaded at 2-hour intervals (or longer). By default we will structure data
 #' to report the values at 2 hour intervals (top of the hour).
 #' @export
-read_transducer <- function(file, downslace = FALSE){
+read_transducer <- function(file, downslace = FALSE, parse_year = NULL){
 
   # transducer files are typically filled with metadata
   # for the first ~70 lines, this is then followed by data record
@@ -37,18 +37,23 @@ read_transducer <- function(file, downslace = FALSE){
   # there is just one transducer that reports only Air temperature
   col_info <- transducer_col_info(device_props$serial)
 
-  data <- read_delim(file,
-                     delim = ",",
-                     trim_ws = TRUE,
-                     skip = skip_n,
-                     col_names = col_info$col_names,
-                     col_types = col_info$col_types,
-                     na = ""
+  data <- readr::read_delim(file,
+                            delim = ",",
+                            trim_ws = TRUE,
+                            skip = skip_n,
+                            col_names = col_info$col_names,
+                            col_types = col_info$col_types,
+                            na = ""
   ) %>%
     dplyr::select(-dummy)
 
   if (downslace) {
     data <- scale_down_to_wqx(data)
+  }
+
+  if (!is.null(parse_year)) {
+    data <- data |>
+      filter(lubridate::year(dateTime) == parse_year)
   }
 
   wqx_data <- transducer_to_wqx(data, device_props) %>%
@@ -69,7 +74,9 @@ transducer_properties <- function(v) {
                     "^Device,", "^Site,", "^Device Name,", "^Serial Number,",
                     "Firmware Version,", "Used Memory,")
   device_props %>%
-    purrr::map(~stringr::str_replace(v[stringr::str_detect(v, .)], ., "")) %>%
+    purrr::map(~stringr::str_replace(
+      stringr::str_replace(v[stringr::str_detect(v, .)], ., ""), ",+", ""
+      )) %>%
     purrr::set_names(c("report_date", "username", "computer_name",
                        "type", "site", "name", "serial", "firmware",
                        "used_memory"))
@@ -222,4 +229,3 @@ transducer_col_info <- function(serial) {
     col_types = col_types
   )
 }
-
