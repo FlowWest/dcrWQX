@@ -26,11 +26,11 @@ read_qapp <- function(file, results_status = "Final") {
     transmute(
       "Project ID" = "SWQM_DCR", # for sample data
       "Monitoring Location ID" = purrr::map_chr(SAMPLENAME, ~fix_location_names(.)),
-      "Activity ID" = paste(`Monitoring Location ID`,lubridate::as_date(lubridate::mdy_hms(SAMPDATE)),
+      "Activity ID" = paste(`Monitoring Location ID`,lubridate::as_date(SAMPDATE),
                             "SR", sep = ":"),
       "Activity Type" = "Sample-Routine",
       "Activity Media Name" = "Water", # sample are always taken from water
-      "Activity Start Date" = lubridate::as_date(lubridate::mdy_hms(SAMPDATE)),
+      "Activity Start Date" = lubridate::as_date(SAMPDATE),
       # "Activity Start Time" = NA_character_,
       # "Activity Start Time Zone" = NA_character_,
       # "Activity Depth/Height Measure" = NA_character_,

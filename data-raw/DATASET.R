@@ -45,12 +45,6 @@ usethis::use_data(characteristic_attributes, overwrite = TRUE)
 
 
 # METHOD ID AND CONTEXT
-method_id_and_context <- read_csv("data-raw/domain-values/dcr-method-codes-lookup.csv")
+method_id_and_context <- readr::read_csv("data-raw/domain-values/dcr-method-codes-lookup.csv")
 
 usethis::use_data(method_id_and_context, overwrite = TRUE)
-
-
-
-
-
-

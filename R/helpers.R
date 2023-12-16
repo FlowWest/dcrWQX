@@ -51,7 +51,6 @@ get_results_detection_condition <- function(result) {
 
 }
 
-
 #' @export
 get_method_context <- function(method_name) {
   method_id_and_context %>%
